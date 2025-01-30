@@ -1,8 +1,10 @@
 #include <iostream>
 
+#define PI 3.14
+
 using namespace std;
 
-const double PI = 3.14;
+//const double PI = 3.14;
 
 double circleArea(double radius);
 double cylinderVolume(double radius, double length);
