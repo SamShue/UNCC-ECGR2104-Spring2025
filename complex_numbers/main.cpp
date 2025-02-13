@@ -1,33 +1,23 @@
 #include <iostream>
+#include "complex.h"
 
 using namespace std;
 
-struct Complex{
-    double real;
-    double imag;
-
-    Complex(double real, double imag){
-        this->real = real;
-        this->imag = imag;
-    }
-
-    Complex add(Complex c){
-        return Complex(real + c.real, imag + c.imag);
-    }
-
-    Complex operator+(Complex c){
-        return Complex(real + c.real, imag + c.imag);
-    }
-
-    void print(){
-        cout << real << " + " << imag << "i" << endl;
-    }
-};
 
 int main(){
     Complex x(5, 3);
     Complex y(2, 6);
     Complex z = x + y;
+
+    Complex a = x + 5.0;
+
+    if(a > z){
+        cout << "a is greater" << endl;
+    } else {
+        cout << "a is lesser or equal to" << endl;
+    }
+
+    a.print();
     //Complex z = x.add(y);
     /*
     Complex z(0, 0);
@@ -36,8 +26,6 @@ int main(){
     */
 
     //Complex z(x.real + y.real, x.imag + y.imag);
-
-    
 
     cout << "Result: ";
     z.print();

@@ -72,7 +72,7 @@ int main(){
     //s2.name = "Bob";
     //s2.setGpa(8.0);
     //s2.id = 801231285;
-
+    /*
     cout << "Name: " << s.name << endl;
     cout << "ID: " << s.id << endl;
     cout << "GPA: " << s.getGpa() << endl;
@@ -80,10 +80,18 @@ int main(){
     cout << "Name: " << s2.name << endl;
     cout << "ID: " << s2.id << endl;
     cout << "GPA: " << s2.getGpa() << endl;
-
+    */
     vector<Student> student_database;
     student_database.push_back(s);
     student_database.push_back(s2);
+    student_database.push_back(Student("Joe", 2.0));
+
+
+    for(int i = 0; i < student_database.size(); i++){
+        cout << "Name: " << student_database.at(i).name << endl;
+        cout << "ID: " << student_database.at(i).id << endl;
+        cout << "GPA: " << student_database.at(i).getGpa() << endl;
+    }
 
     /*
     vector<string> names = {"Sam", "Bob", "Joe", "Bob2"};
