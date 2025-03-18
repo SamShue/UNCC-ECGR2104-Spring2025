@@ -9,11 +9,11 @@ double Complex::getMagnitude(){
     return std::sqrt(real*real + imag*imag);
 }
 
-Complex Complex::add(Complex c){
+Complex Complex::add(const Complex& c){
     return Complex(real + c.real, imag + c.imag);
 }
 
-Complex Complex::operator+(Complex c){
+Complex Complex::operator+(const Complex& c){
     return Complex(real + c.real, imag + c.imag);
 }
 
@@ -21,7 +21,7 @@ Complex Complex::operator+(double c){
     return Complex(real + c, imag);
 }
 
-Complex Complex::operator-(Complex c){
+Complex Complex::operator-(const Complex& c){
     return Complex(real - c.real, imag - c.imag);
 }
 

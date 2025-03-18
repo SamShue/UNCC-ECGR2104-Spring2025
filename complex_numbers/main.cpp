@@ -18,7 +18,7 @@ int main(){
     }
 
     a.print();
-    //Complex z = x.add(y);
+    Complex z = x.add(y);
     /*
     Complex z(0, 0);
     z.real = x.real + y.real;
