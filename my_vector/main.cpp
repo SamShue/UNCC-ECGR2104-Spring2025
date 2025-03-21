@@ -2,14 +2,26 @@
 
 using namespace std;
 
+template <typename T>
 class vector{
     public:
     vector(){
-        a = new int[3];
+        a = new T[3];
         nextIndex = 0;
         allocatedSize = 3;
 
-        cout << a << endl;
+        cout << "a's address: " << a << endl;
+    }
+
+    vector(const vector<T>& other){
+        cout << "Copy Constructor Called!" << endl;
+        a = new T[other.size()];
+        allocatedSize = other.allocatedSize;
+        nextIndex = other.nextIndex;
+
+        for(int i = 0; i < other.size(); i++){
+            a[i] = other.at(i);
+        }
     }
 
     ~vector(){
@@ -17,12 +29,25 @@ class vector{
         delete[] a;
     }
 
-    void push_back(int d){
+    void operator=(const vector<T>& other){
+        cout << "Copy Assignment Override Called!" << endl;
+        delete[] a;
+
+        a = new T[other.size()];
+        allocatedSize = other.allocatedSize;
+        nextIndex = other.nextIndex;
+
+        for(int i = 0; i < other.size(); i++){
+            a[i] = other.at(i);
+        }
+    }
+
+    void push_back(T d){
         if(nextIndex < allocatedSize){
             a[nextIndex] = d;
             nextIndex++;
         } else {
-            int* larger_a = new int[allocatedSize + 3];
+            T* larger_a = new T[allocatedSize + 3];
             for(int i = 0; i < nextIndex; i++){
                 larger_a[i] = a[i];
             }
@@ -41,7 +66,7 @@ class vector{
         nextIndex--;
     }
 
-    int& at(int index) const {
+    T& at(int index) const {
         return a[index];
     }
 
@@ -50,16 +75,24 @@ class vector{
     }
 
     private:
-    int* a;
+    T* a;
     int nextIndex;
     int allocatedSize;
 };
 
 void createsProblem(){
-    vector v;
+    vector<double> v;
     v.push_back(5);
     v.push_back(3);
     v.push_back(7);
+
+    vector<double> v2 = v;
+
+    v2.push_back(1);
+
+    v = v2;
+
+    v2.at(1) = 9;
 
     for(int i = 0; i < v.size(); i++){
         cout << v.at(i) << ", ";
