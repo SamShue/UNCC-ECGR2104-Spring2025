@@ -11,7 +11,65 @@ struct Node {
     Node* next;
 };
 
-void push_back(Node*& head, int data){
+class SinglyLinkedList {
+    public:
+    SinglyLinkedList();
+    ~SinglyLinkedList();
+    SinglyLinkedList(const SinglyLinkedList& other);
+    void operator=(const SinglyLinkedList& other);
+    void push_back(int data);
+    void pop_back();
+    int& at(int index) const;
+    int size() const;
+    void insert(int data, int index);
+    void remove(int index);
+
+    private:
+    Node* head;
+    int numElements;
+};
+
+SinglyLinkedList::SinglyLinkedList(){
+    head = nullptr;
+    numElements = 0;
+}
+
+SinglyLinkedList::~SinglyLinkedList(){
+    cout << "Destructor Called!" << endl;
+    while(head != nullptr){
+        Node* temp = head->next;
+        delete head;
+        head = temp;
+    }
+}
+
+SinglyLinkedList::SinglyLinkedList(const SinglyLinkedList& other){
+    cout << "Copy Constructor Called!" << endl;
+    numElements = 0;
+    head = nullptr;
+    for(int i = 0; i < other.size(); i++){
+        push_back(other.at(i));
+    }
+}
+
+void SinglyLinkedList::operator=(const SinglyLinkedList& other){
+    cout << "Copy Assignment Operator Override Called!" << endl;
+    while(head != nullptr){
+        Node* temp = head->next;
+        delete head;
+        head = temp;
+    }
+    
+    numElements = 0;
+    for(int i = 0; i < other.size(); i++){
+        push_back(other.at(i));
+    }
+
+}
+
+void SinglyLinkedList::push_back(int data){
+    numElements++;
+
     // List is empty
     if(head == nullptr){
         head = new Node(data);
@@ -26,10 +84,12 @@ void push_back(Node*& head, int data){
     temp->next = new Node(data);
 }
 
-void pop_back(Node*& head){
+void SinglyLinkedList::pop_back(){
     if(head == nullptr){
         return;
     }
+
+    numElements--;
 
     if(head->next == nullptr){
         delete head;
@@ -46,7 +106,7 @@ void pop_back(Node*& head){
     temp->next = nullptr;
 }
 
-int& at(Node* head, int index){
+int& SinglyLinkedList::at(int index) const {
     Node* temp = head;
     for(int i = 0; i < index; i++){
         temp = temp->next;
@@ -54,7 +114,9 @@ int& at(Node* head, int index){
     return temp->data;
 }
 
-int size(Node* head){
+int SinglyLinkedList::size() const {
+    return numElements;
+    /*
     Node* temp = head;
     int count = 0;
     while(temp != nullptr){
@@ -62,9 +124,12 @@ int size(Node* head){
         count++;
     }
     return count;
+    */
 }
 
-void insert(Node* head, int data, int index){
+void SinglyLinkedList::insert(int data, int index){
+    numElements++;
+
     Node* temp = head;
     for(int i = 0; i < (index - 1); i++){
         temp = temp->next;
@@ -75,7 +140,9 @@ void insert(Node* head, int data, int index){
     temp->next->next = backup;
 }
 
-void remove(Node* head, int index){
+void SinglyLinkedList::remove(int index){
+    numElements--;
+
     Node* temp = head;
     for(int i = 0; i < (index - 1); i++){
         temp = temp->next;
@@ -85,21 +152,30 @@ void remove(Node* head, int index){
     temp->next = backup;
 }
 
-int main(){
-    Node* head = nullptr;
+void badFunction(){
+    SinglyLinkedList sll;
     
-    push_back(head, 4);
-    push_back(head, 7);
-    push_back(head, 3);
-    push_back(head, 9);
+    sll.push_back(4);
+    sll.push_back(7);
+    sll.push_back(3);
+    sll.push_back(9);
 
-    insert(head, 1, 2);
+    SinglyLinkedList sll2 = sll; // potential shallow copy
 
-    remove(head, 3);
+    sll2.insert(1, 2);
 
-    for(int i = 0; i < size(head); i++){
-        cout << at(head, i) << endl;
+    sll2.remove(3);
+
+    sll = sll2;
+
+    for(int i = 0; i < sll.size(); i++){
+        cout << sll.at(i) << endl;
     }
+}
+
+int main(){
+    badFunction();
+    badFunction();
 
     return 0;
 }

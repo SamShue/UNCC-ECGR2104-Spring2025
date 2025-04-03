@@ -14,11 +14,17 @@ void swap(int& x, int& y){
     y = temp;
 }
 
+void timesTwo(int* x){
+    *x = *x * 2;
+}
+
 int main(){
     int a = 5;
     int b = 10;
 
-    swap(&a, &b);
+    swap(a, b);
+
+    timesTwo(&a);
 
     cout << "a: " << a << endl;
     cout << "b: " << b << endl;
