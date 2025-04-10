@@ -54,6 +54,9 @@ SinglyLinkedList::SinglyLinkedList(const SinglyLinkedList& other){
 
 void SinglyLinkedList::operator=(const SinglyLinkedList& other){
     cout << "Copy Assignment Operator Override Called!" << endl;
+    if(this == &other)
+        return;
+
     while(head != nullptr){
         Node* temp = head->next;
         delete head;
@@ -167,6 +170,8 @@ void badFunction(){
     sll2.remove(3);
 
     sll = sll2;
+
+    sll = sll;
 
     for(int i = 0; i < sll.size(); i++){
         cout << sll.at(i) << endl;
