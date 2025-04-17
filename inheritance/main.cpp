@@ -58,7 +58,7 @@ class Student : public Person {
     double gpa;
 };
 
-class Faculty : public Person {
+class Faculty  {
     public:
     Faculty(string name, bool tenure) : Person(name) {
         this->tenure = tenure;
