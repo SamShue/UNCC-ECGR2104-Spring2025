@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -66,7 +67,10 @@ class vector{
         nextIndex--;
     }
 
-    T& at(int index) const {
+    T& at(unsigned int index) const {
+        if(index >= size()){
+            throw out_of_range("Index is out of range!");
+        }
         return a[index];
     }
 
@@ -92,7 +96,7 @@ void createsProblem(){
 
     v = v2;
 
-    v2.at(1) = 9;
+    v2.at(110) = 9;
 
     for(int i = 0; i < v.size(); i++){
         cout << v.at(i) << ", ";
@@ -101,9 +105,13 @@ void createsProblem(){
 }
 
 int main(){
-    createsProblem();
-    createsProblem();
-    createsProblem();
+    try{
+        createsProblem();
+        createsProblem();
+        createsProblem();
+    } catch(const exception &e){
+        cout << e.what() << endl;
+    }
 
     return 0;
 }
